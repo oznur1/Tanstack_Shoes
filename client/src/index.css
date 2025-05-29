@@ -25,3 +25,13 @@ body {
         @apply py-[32px] px-[16px] md:px-[32px] lg:px-[48px] xl:px-[64px];
     }
 }
+
+@layer components {
+  .header-button {
+    @apply px-6 py-2 hover:bg-grey transition cursor-pointer whitespace-nowrap w-full;
+  }
+
+  .footer-button {
+    @apply bg-black p-4 rounded-lg cursor-pointer hover:brightness-90 transition;
+  }
+}

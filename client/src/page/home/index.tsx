@@ -1,11 +1,18 @@
-import type{FC } from 'react'
+import type { FC } from "react";
+import Hero from "./hero";
+import Heading from "./heading";
+import List from "./list";
 
-const Home:FC = () => {
+const Home: FC = () => {
   return (
     <div>
-  home
-    </div>
-  )
-}
+      <Hero />
 
-export default Home
+      <Heading />
+
+      <List />
+    </div>
+  );
+};
+
+export default Home;

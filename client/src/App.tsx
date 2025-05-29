@@ -1,27 +1,37 @@
+import type { FC } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./page/home";
+import Login from "./page/login";
+import Register from "./page/register";
+import Detail from "./page/detail";
+import Dashboard from "./page/dashboard";
+import Protected from "./components/protected";
+import Edit from "./page/edit";
+import Create from "./page/create";
 
-import type { FC } from "react"
-import {BrowserRouter, Route, Routes} from "react-router-dom"
-import Home from "./page/home"
-import Register from "./page/register"
-import Detail from "./page/detail"
-import Login from "./page/login"
-import Dashboard from "./page/dashboard"
-
-const App:FC = () => {
+const App: FC = () => {
   return (
-   <BrowserRouter>
-   
-   <Routes>
-    <Route path="/" element={<Home/>}/>
-     <Route path="login/" element={<Login/>}/>
-    <Route path="/register" element={<Register/>}/>
-     <Route path="/detail" element={<Detail/>}/>
-    <Route path="/dashboard" element={<Dashboard/>}/>
+    <BrowserRouter>
+      <Routes>
+        {/* bütün kullanıcıların erişebileceği sayfalar */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-   </Routes>
-   
-   </BrowserRouter>
-  )
-}
+        {/* kullanıcı giriş yapmışsa erişebileceği sayfalar */}
+        <Route element={<Protected />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/shoe/:id" element={<Detail />} />
+        </Route>
 
-export default App
+        {/* admin rolüne sahip kullanıcı erişebileceği sayfalar */}
+        <Route element={<Protected allowedRoles={["admin"]} />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/create" element={<Create />} />
+          <Route path="/dashboard/edit/:id" element={<Edit />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
+export default App;
